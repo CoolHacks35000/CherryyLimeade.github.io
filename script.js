@@ -182,7 +182,6 @@ function sendToDiscordWebhook(newItem) {
     const yourUserId = "889151543515955310";
 
     const data = {
-        content: `<@${yourUserId}>`,
         embeds: [
             {
                 title: "someone suggested a new stat",
