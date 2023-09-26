@@ -179,7 +179,6 @@ document.getElementById("addItemForm").addEventListener("submit", function (e) {
 
 function sendToDiscordWebhook(newItem) {
     const webhookUrl = "https://discord.com/api/webhooks/1155948454422532268/zFLC3GoqgiARqeYPLsljAQGnrK0Jd45tisWFTAkYhQlagwjP4u_dx2yLwyXBzYkl21hv";
-    const yourUserId = "889151543515955310";
 
     const data = {
         embeds: [
