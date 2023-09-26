@@ -44,7 +44,7 @@ const items = [
     { name: "19$ Fortnite card", rarity: 0.00000005263158 },
     { name: "no more cardboard eating in general", rarity: 0.00000005 },
     { name: "Polychromatic Light", rarity: 0.00000003081689 },
-    { name: "John (OMG JOHN PULSAR REFERENCE??!??!?!)", rarity: 0.0000000131925999 },
+    { name: "Non innocent oceanic creature 1/???", rarity: 0.0000000131925999 },
     { name: "EL GATO V0.001", rarity: 0.0000000100000001 },
     { name: "John (OMG JOHN PULSAR REFERENCE??!??!?!)", rarity: 0.00000001 },
     { name: "funny germ (he dont bite)", rarity: 0.000000002 },
