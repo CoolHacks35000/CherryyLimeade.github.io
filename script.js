@@ -155,7 +155,7 @@ function collectItem() {
     saveGameState(); // Save the game state after collecting items
 
     // Check if a rare item has been found
-    if (item.rarity < 0.000005 && item.rarity > 0.0000001) {
+    if (item.rarity < 0.000001 && item.rarity > 0.0000001) {
         rareItemFound = true;
         const rarityValueFormatted = formatNumberWithCommas(Math.round(1 / item.rarity));
 
