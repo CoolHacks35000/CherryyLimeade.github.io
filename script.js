@@ -182,6 +182,7 @@ function collectItem() {
 
     // Check if a rare item has been found
     if (item.rarity < 0.000001 && item.rarity > 0.0000001) {
+    if (item.rarity < 0.000001 && item.rarity > 0.00000011) {
         rareItemFound = true;
         const rarityValueFormatted = formatNumberWithCommas(Math.round(1 / item.rarity));
 
@@ -193,6 +194,7 @@ function collectItem() {
         sendWebhookMessage(webhookUrl, message);
     }
     if (item.rarity < 0.0000001 && item.rarity > 0.000000015) {
+    if (item.rarity < 0.00000011) {
         rareItemFound = true;
         const rarityValueFormatted = formatNumberWithCommas(Math.round(1 / item.rarity));
 
