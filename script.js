@@ -275,20 +275,3 @@ updateRarityIndex();
 
 // Load the game state
 loadGameState();
-
-document.getElementById("addItemForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const itemName = document.getElementById("itemName").value;
-    const itemRarity = document.getElementById("itemRarity").value; // Get rarity as a string
-
-    if (itemName && itemRarity) {
-        const newItem = { name: itemName, rarity: itemRarity }; // Rarity as a string
-        items.push(newItem);
-        sendToDiscordWebhook(newItem);
-        document.getElementById("itemName").value = "";
-        document.getElementById("itemRarity").value = "";
-    } else {
-        alert("Please enter a valid name and rarity for the item.");
-    }
-});
