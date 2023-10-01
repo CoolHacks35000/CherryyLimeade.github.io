@@ -291,4 +291,4 @@ document.getElementById("addItemForm").addEventListener("submit", function (e) {
     } else {
         alert("Please enter a valid name and rarity for the item.");
     }
-}); // <-- Missing closing curly brace for the addEventListener function
+});
