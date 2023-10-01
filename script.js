@@ -181,7 +181,6 @@ function collectItem() {
     saveGameState(); // Save the game state after collecting items
 
     // Check if a rare item has been found
-    if (item.rarity < 0.000001 && item.rarity > 0.0000001) {
     if (item.rarity < 0.000001 && item.rarity > 0.00000011) {
         rareItemFound = true;
         const rarityValueFormatted = formatNumberWithCommas(Math.round(1 / item.rarity));
@@ -194,7 +193,6 @@ function collectItem() {
         sendWebhookMessage(webhookUrl, message);
     }
     if (item.rarity < 0.0000001 && item.rarity > 0.000000015) {
-    if (item.rarity < 0.00000011) {
         rareItemFound = true;
         const rarityValueFormatted = formatNumberWithCommas(Math.round(1 / item.rarity));
 
@@ -293,4 +291,4 @@ document.getElementById("addItemForm").addEventListener("submit", function (e) {
     } else {
         alert("Please enter a valid name and rarity for the item.");
     }
-});
+}); // <-- Missing closing curly brace for the addEventListener function
