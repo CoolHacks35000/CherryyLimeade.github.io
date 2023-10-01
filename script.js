@@ -89,7 +89,7 @@ const items = [
     { name: "Boulder ", rarity: 0.0000004 },
     { name: "EXTREMELY EVEN RARER WOOD (OMG VERY EPIC 👍)", rarity: 0.0000004 },
     { name: "Mclovin's drivers license", rarity: 0.0000004 },
-    { name: "Together Wwe're stronger!", rarity: 0.00000031249375 },
+    { name: "Together we're stronger!", rarity: 0.00000031249375 },
     { name: "👽", rarity: 0.0000003333333 },
     { name: "😡", rarity: 0.0000003333332 },
     { name: "👍", rarity: 0.0000003333331 },
