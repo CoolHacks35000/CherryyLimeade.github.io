@@ -2,6 +2,8 @@ const itemContainer = document.getElementById("item-container");
 const itemCounters = document.getElementById("item-counters");
 const rarityIndex = document.getElementById("rarity-index");
 
+let luckBoost = 1;
+
 async function sendWebhookMessage(webhookUrl, message) {
     const data = {
         content: message,
@@ -20,128 +22,47 @@ async function sendWebhookMessage(webhookUrl, message) {
     }
 }
 
+function changeBackgroundColor() {
+    // Get the input value
+    var hexColor = document.getElementById("colorInput").value;
+
+    // Validate if the input is a valid hex color
+    if (/^#[0-9A-F]{6}$/i.test(hexColor)) {
+        // Set the background color
+        document.body.style.backgroundColor = hexColor;
+    }
+}
+
+function changeInventoryColor() {
+    // Get the input value
+    var hexColor = document.getElementById("invInput").value;
+
+    // Validate if the input is a valid hex color
+    if (/^#[0-9A-F]{6}$/i.test(hexColor)) {
+        // Set the background color of the container
+        document.getElementsByClassName("container")[0].style.backgroundColor = hexColor;
+    }
+}
+
 // you can mod this game if you want just give me credit k thx byee
 
 const items = [
-    { name: "germ", rarity: 0.3 },
-    { name: "dust", rarity: 0.2 },
-    { name: "dirt", rarity: 0.15 },
-    { name: "pebbles", rarity: 0.1 },
-    { name: "UGLY DOG", rarity: 0.1 },
-    { name: "a bug", rarity: 0.05 },
-    { name: "grass 😱", rarity: 0.01 },
-    { name: "Wood (SO BASIC 🥱)", rarity: 0.004 },
-    { name: "flower", rarity: 0.002 },
-    { name: "Stick", rarity: 0.002 },
-    { name: "UNWANTED WEED", rarity: 0.001 },
-    { name: "Fossil", rarity: 0.001 },
-    { name: "ant hill", rarity: 0.0004 },
-    { name: "Rare Wood (Less basic 🙂)", rarity: 0.0004 },
-    { name: "a fruit (you probably dont want to eat this)", rarity: 0.0003 },
-    { name: "a tree (SO COL)", rarity: 0.0002 },
-    { name: "a bush (SUPER DUPER COL)", rarity: 0.000134 },
-    { name: "Water Droplet", rarity: 0.00013333 },
-    { name: "Stone", rarity: 0.0001 },
-    { name: "Slightly less ugly dog", rarity: 0.0001 },
-    { name: "Coal", rarity: 0.0001 },
-    { name: "the ULTIMATE leaf", rarity: 0.00008 },
-    { name: "a measly ant (NOT col)", rarity: 0.00006 },
-    { name: "a stinky fart (EWWW)", rarity: 0.00004 },
-    { name: "Even Rarer Wood (Not Basic 🎉)", rarity: 0.00004 },
-    { name: "Iron", rarity: 0.00004 },
-    { name: "solid bar of dirt (kinda col?)", rarity: 0.000032 },
-    { name: "magnetic dirt (epic!)", rarity: 0.000021 },
-    { name: "Silver", rarity: 0.00002 },
-    { name: "Lets go golfing", rarity: 0.0000199995 },
-    { name: "Metal", rarity: 0.0000133333 },
-    { name: "Steel", rarity: 0.0000133333 },
-    { name: "slightly rarer grass 😱 (tastes like salt)", rarity: 0.0000132 },
-    { name: "what do i name this", rarity: 0.000012 },
-    { name: "salt (tastes like slightly rarer grass)", rarity: 0.00001 },
-    { name: "Pepper (Feels like Slightly rarer grass)", rarity: 0.00001 },
-    { name: "Tinted slightly purple void (IT STINGS!!!)", rarity: 0.00001 },
-    { name: "Call me asparagus", rarity: 0.0000099998 },
-    { name: "the skibidi toiliet or creepear", rarity: 0.0000067 },
-    { name: "Avocado", rarity: 0.000005 },
-    { name: "Dust Jr", rarity: 0.000005 },
-    { name: "Cinnamon toast crunch", rarity: 0.0000049999 },
-    { name: "Fruity dog 0.01% power", rarity: 0.0000045 },
-    { name: "Extremely Rare Wood (VERY COOL 😀)", rarity: 0.000004 },
-    { name: "Guava Juice (Irrelevent but yummy)", rarity: 0.00000333333 },
-    { name: "mr. dust", rarity: 0.0000025 },
-    { name: "Ms. dust", rarity: 0.00000249997 },
-    { name: "And perhaps what is this?", rarity: 0.00000249995 },
-    { name: "WANTED WEED??? (why is it wanted?)", rarity: 0.000002 },
-    { name: "Dirt V2", rarity: 0.000002 },
-    { name: ":GoodFriday:", rarity: 0.000001500001 },
-    { name: "OMG SCARY DOG", rarity: 0.000001500001 },
-    { name: "Water Bottle", rarity: 0.000001333333 },
-    { name: "Uncle dust", rarity: 0.00000125 },
-    { name: "Tell em to bring out the whole ocean!", rarity: 0.000001249975 },
-    { name: "I know what to name this", rarity: 0.0000012 },
-    { name: "turtle v1", rarity: 0.000001000001 },
-    { name: "Pickaxe with super scary gems on it (AHHHHHH)", rarity: 0.000001000001 },
-    { name: "Gold", rarity: 0.00000100000000000000001 },
-    { name: "rare crystal v0.001", rarity: 0.000001 },
-    { name: "Almost not ugly dog?", rarity: 0.000001 },
-    { name: "Blue chickenite", rarity: 0.000000769231 },
-    { name: "Tell em to bring out the yacht!", rarity: 0.0000006249875 },
-    { name: "Boulder ", rarity: 0.0000004 },
-    { name: "EXTREMELY EVEN RARER WOOD (OMG VERY EPIC 👍)", rarity: 0.0000004 },
-    { name: "Mclovin's drivers license", rarity: 0.0000004 },
-    { name: "Together we're stronger!", rarity: 0.00000031249375 },
-    { name: "👽", rarity: 0.0000003333333 },
-    { name: "😡", rarity: 0.0000003333332 },
-    { name: "👍", rarity: 0.0000003333331 },
-    { name: "👏", rarity: 0.0000003333330 },
-    { name: "🙂", rarity: 0.0000003333329 },
-    { name: "🎉", rarity: 0.0000003333328 },
-    { name: "PART", rarity: 0.0000002623096 },
-    { name: "Spinning Stone (how is it spinning??)", rarity: 0.0000002 },
-    { name: "Purple sauce", rarity: 0.00000014285715 },
-    { name: "What is that name again?", rarity: 0.00000012048193 },
-    { name: "Tomato man (why is he purple??)", rarity: 0.000000125 },
-    { name: "kevin (kevin (kevin (kevin)))", rarity: 0.0000001 },
-    { name: "Diamond", rarity: 0.0000001 },
-    { name: "Rare Crystal v0.01", rarity: 0.0000001 },
-    { name: "Little buddy was sick 🤒 took all his bands", rarity: 0.0000001 },
-    { name: "Green orb?? (I think it's a lore reference)", rarity: 0.0000001 },
-    { name: "19$ Fortnite card", rarity: 0.00000005263158 },
-    { name: "no more cardboard eating in general", rarity: 0.00000005 },
-    { name: "0.0001% ugly dog", rarity: 0.00000005 },
-    { name: "Angelite", rarity: 0.000000045 },
-    { name: "Fruity dog 0.1% power", rarity: 0.000000045 },
-    { name: "Polychromatic Light", rarity: 0.00000003081689 },
-    { name: "Khaled soul", rarity: 0.00000002 },
-    { name: "VERY SCARY DOG AHHHHHHHHHHH!!!!!", rarity: 0.0000000150000001 },
-    { name: "Protogenium", rarity: 0.0000000150000001 },
-    { name: "Non innocent oceanic creature 1/???", rarity: 0.0000000131925999 },
-    { name: "EL GATO V0.001", rarity: 0.0000000100000001 },
-    { name: "Heart attack dog", rarity: 0.0000000100000001 },
-    { name: "John (OMG JOHN PULSAR REFERENCE??!??!?!)", rarity: 0.00000001 },
-    { name: "Shine bright like a diamond (but the other diamond didn’t shine bright)", rarity: 0.00000001 },
-    { name: "Rare Crystal v0.1", rarity: 0.00000001 },
-    { name: "Cheese slice full of hourglasses (how is it full of hourglasses!!)", rarity: 0.00000000600000001 },
-    { name: "True Angelite", rarity: 0.0000000045 },
-    { name: "FRUITY DOG", rarity: 0.0000000045 },
-    { name: "Non ugly dog", rarity: 0.00000000333333333 },
-    { name: "Hourglass full of cheese slices (why is it full of cheese??)", rarity: 0.000000003 },
-    { name: "REAL PART", rarity: 0.00000000262268109 },
-    { name: "funny germ (he dont bite)", rarity: 0.000000002 },
-    { name: "Death 💀 ☠️", rarity: 0.000000001500000001 },
-    { name: "deciduous_germ", rarity: 0.000000001304811684 },
-    { name: "STUPID BABY V0.000000001", rarity: 0.000000001000000001 },
-    { name: "Doomstone", rarity: 0.000000001000000001 },
-    { name: "Rare Crystal v1", rarity: 0.000000001 },
-    { name: "bacteria (he bites)", rarity: 0.000000001 },
-    { name: "roundcat", rarity: 0.000000000747551768 },
-    { name: "Ultimate stew (Yummers!)", rarity: 0.0000000005 },
-    { name: "Water bottle filled with ultimate stew?? (ULTIMATE YUMMERS!!!!)", rarity: 0.00000000045 },
-    { name: "True fruity dog 101% power", rarity: 0.00000000045 },
-    { name: "CHICKEN 0.00000001% POWER", rarity: 0.0000000001 },
-    { name: "TRUE RARE CRYSTAL", rarity: 0.0000000001 },
-    { name: "CAT", rarity: 0.000000000001000000000001 },
-    
+    { name: "atom", rarity: luckBoost/1 },
+{ name: "molecule", rarity: luckBoost/2 },
+{ name: "ParticleEmitter", rarity: luckBoost/5 },
+{ name: "seegma", rarity: luckBoost/10 },
+{ name: "mr krabs figurine", rarity: luckBoost/13 },
+{ name: "rublux boolleey storey", rarity: luckBoost/15 },
+{ name: "robert topalla", rarity: luckBoost/20 },
+{ name: "kevin leonardo", rarity: luckBoost/50 },
+{ name: ":plonk:", rarity: luckBoost/100 },
+{ name: "ik someone who likes mushrooms more than u", rarity: luckBoost/110 },
+{ name: "i like mushrooms more than u", rarity: luckBoost/111 },
+{ name: "farty party", rarity: luckBoost/10000 },
+{ name: "skibidi toilet plushie", rarity: luckBoost/1000000 },
+{ name: "10 dollar shipping", rarity: luckBoost/1000001 },
+{ name: "kevin", rarity: luckBoost/5000000 },
+{ name: "Clown nose verse", rarity: luckBoost/100000000 },
 ];
 
 let itemCounts = {};
@@ -153,8 +74,26 @@ items.forEach((item) => {
     itemCounts[item.name] = 0;
 });
 
+let cumulativeProbabilities = calculateCumulativeProbabilities();
+
 function getRandomItem() {
     const randomValue = Math.random();
+    let low = 0;
+    let high = items.length - 1;
+
+    while (low < high) {
+        const mid = Math.floor((low + high) / 2);
+        if (randomValue <= cumulativeProbabilities[mid]) {
+            high = mid;
+        } else {
+            low = mid + 1;
+        }
+    }
+
+    return items[low];
+}
+
+function calculateCumulativeProbabilities() {
     const cumulativeProbabilities = [];
     let cumulativeProbability = 0;
 
@@ -163,16 +102,13 @@ function getRandomItem() {
         cumulativeProbabilities.push(cumulativeProbability);
     }
 
-    for (let i = 0; i < cumulativeProbabilities.length; i++) {
-        if (randomValue <= cumulativeProbabilities[i]) {
-            return items[i];
-        }
-    }
-
-    return items[0]; // Default to the first item if nothing is selected
+    return cumulativeProbabilities.map(value => value / cumulativeProbability);
 }
 
-// Add this code to update the game state and save it when collecting items
+function updateCumulativeProbabilities() {
+    cumulativeProbabilities = calculateCumulativeProbabilities();
+}
+
 function collectItem() {
     const item = getRandomItem();
     itemCounts[item.name]++;
@@ -181,40 +117,43 @@ function collectItem() {
     saveGameState(); // Save the game state after collecting items
 
     // Check if a rare item has been found
-    if (item.rarity < 0.000001 && item.rarity > 0.00000011) {
+    if (item.rarity < 1.000001e-06 && item.rarity > 1.000001e-08) {
         rareItemFound = true;
         const rarityValueFormatted = formatNumberWithCommas(Math.round(1 / item.rarity));
 
         // Create a message to send to Discord
-        const webhookUrl = "https://discord.com/api/webhooks/1156031812636774482/COhSzDROD_iK3qIswEqD1F-G-ssFA5i7KpIt44hoJXZhfyNgsKT_vtY5oCleWAxaP6sU"; // Replace with your actual Discord webhook URL
-        const message = `COOL THINGY FOUND 😱😱😱⁉️⁉️🙏🙏😹💯🙅‍♂️💯💯🔥🔥😱👍👍💀🙏🙏🙅‍♂️💯⁉️: ${item.name}: 1/${formatNumberWithCommas(rarityValueFormatted)}`;
+        const webhookUrl = "https://discord.com/api/webhooks/1189328252213395476/0j8UXokstq5oCqmVnpulQRw9OGpAkJ3G0sNZhWsuEvAg5FqZz1N-ZebHMCS4MlFtp9hJ"; // Replace with your actual Discord webhook URL
+        const message = `SO SKEEKY: ${item.name} IS SO SKEEKY, ITS 1/${formatNumberWithCommas(rarityValueFormatted)}`;
     
         // Send the message to Discord
         sendWebhookMessage(webhookUrl, message);
     }
-    if (item.rarity < 0.0000001 && item.rarity > 0.000000015) {
+    if (item.rarity < 0.0000000512319 && item.rarity > 0.0000000172) {
         rareItemFound = true;
         const rarityValueFormatted = formatNumberWithCommas(Math.round(1 / item.rarity));
 
         // Create a message to send to Discord
-        const webhookUrl = "https://discord.com/api/webhooks/1156031812636774482/COhSzDROD_iK3qIswEqD1F-G-ssFA5i7KpIt44hoJXZhfyNgsKT_vtY5oCleWAxaP6sU"; // Replace with your actual Discord webhook URL
-        const message = `SUPER COOL THINGY FOUND 🙅‍♂️🙅‍♂️🙅‍♂️🪨🪨🪨🪨😭😭💀🙏🙏😹😱😱⁉️: ${item.name}: 1/${formatNumberWithCommas(rarityValueFormatted)}`;
+        const webhookUrl = "https://discord.com/api/webhooks/1189323087469097081/-vAfNqE4yIafZOZpLiprgtsgfx8KXby69Iv5tUYvruLJnSDkcru7I-zXQh1OiYAaA7OK"; // Replace with your actual Discord webhook URL
+        const message = `WOW WOW ORE FOUND!!!!: ${item.name}: 1/${formatNumberWithCommas(rarityValueFormatted)}`;
 
         // Send the message to Discord
         sendWebhookMessage(webhookUrl, message);
     }
-    if (item.rarity < 0.000000015) {
+    if (item.rarity < 0.0000000172) {
         rareItemFound = true;
         const rarityValueFormatted = formatNumberWithCommas(Math.round(1 / item.rarity));
 
         // Create a message to send to Discord
-        const webhookUrl = "https://discord.com/api/webhooks/1156031812636774482/COhSzDROD_iK3qIswEqD1F-G-ssFA5i7KpIt44hoJXZhfyNgsKT_vtY5oCleWAxaP6sU"; // Replace with your actual Discord webhook URL
-        const message = `SUPER DUPER COOL THINGY FOUND 🗣️🗣️🪨🪨🪨🗿🗿🍷🍷💯🙏😝😭😀😭🔥🔛🔝: ${item.name}: 1/${formatNumberWithCommas(rarityValueFormatted)}`;
+        const webhookUrl = "https://discord.com/api/webhooks/1189323087469097081/-vAfNqE4yIafZOZpLiprgtsgfx8KXby69Iv5tUYvruLJnSDkcru7I-zXQh1OiYAaA7OK"; // Replace with your actual Discord webhook URL
+        const message = `YEAHHHHH @everyone @everyone YEAHHHHH: ${item.name}: 1/${formatNumberWithCommas(rarityValueFormatted)}`;
 
         // Send the message to Discord
         sendWebhookMessage(webhookUrl, message);
     }
 }
+
+// Call this function whenever the items list changes
+updateCumulativeProbabilities();
 
 function saveGameState() {
     try {
@@ -263,12 +202,490 @@ function updateRarityIndex() {
     });
 }
 
-// Set up a timer to automatically collect items every half-second
-setInterval(collectItem, 1);
-setInterval(collectItem, 1);
-setInterval(collectItem, 1);
-setInterval(collectItem, 1);
-setInterval(collectItem, 1);
+// Set up a timer to automatically collect items super fast
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+setInterval(collectItem, 0.0000000000000000000001);
+
+setInterval(updateItemDisplay, 10);
+setInterval(saveGameState, 10);
 
 // Initialize the rarity index
 updateRarityIndex();
