@@ -1,7 +1,6 @@
 const itemContainer = document.getElementById("item-container");
 const rarityIndex = document.getElementById("rarity-index");
 
-let luckBoost = 1;
 let totalItems = 0;
 
 function changeBackgroundColor() {
@@ -188,9 +187,9 @@ let rareItemFound = false;
 
 let cumulativeProbabilities = calculateCumulativeProbabilities();
 
-function getRandomItem(luck) {
+function getRandomItem() {
   let randomValue = Math.random();
-  randomValue /= luck;
+  randomValue /= 1;
   let temp = Object.keys(items);
   let low = 0;
   let high = temp.length;
@@ -242,7 +241,7 @@ function updateTotalItemsDisplay() {
 }
 
 function collectItem() {
-  const item = getRandomItem(luckBoost);
+  const item = getRandomItem();
   totalItems++;
   items[item][1]++;
   updateTotalItemsDisplay();
