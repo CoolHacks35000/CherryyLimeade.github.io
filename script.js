@@ -106,6 +106,7 @@ let items = {
  "sparkle":[1/10000000, 0],
  "my gyatt rumbled":[1/8283929, 0],
  "the big bidi":[1/8000000, 0],
+ "filler ore":[1/636512, 0],
  "kevin":[1/5000000, 0],
  "William":[1/2000000, 0],
  "10 dollar shipping":[1/1000000, 0],
@@ -119,6 +120,7 @@ let items = {
  "Emoji if you look at it hard enough":[1/502000, 0],
  "joeverite":[1/460500, 0],
  "obama icespice":[1/400000, 0],
+ "1 in 300,000 crystal":[1/300000, 0],
  "ores if they were awesome":[1/252520, 0],
  "UGC Dominus":[1/125000, 0],
  "legendary cyan pebble":[1/110000, 0],
@@ -204,11 +206,6 @@ function getRandomItem() {
   }
   low = temp.length - 1 - low;
   return temp[low];
-}
-
-function updateTotalStats() {
-    const htmlThing = document.getElementById("totalStats");
-    htmlThing.innerHTML = `There are currently 148 different stats in the game <3`
 }
 
 function calculateCumulativeProbabilities() {
@@ -323,13 +320,8 @@ function itemLoop() {
   itemTimer = setInterval(gameLoop, 0);
 }
 
+// make items
 createItems();
-
-// Load the game state
-
-
-// set stat amount at the top
-updateTotalStats();
 
 // Start the game loop
 itemLoop();
