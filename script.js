@@ -114,7 +114,7 @@ let items = {
  "skibidi toilet plushie":[1/1000000, 0],
  "John's legendary tome of janitor business":[1/870000, 0],
  "purplx":[1/739000, 0],
- "random rotating spinkler":[1/700000, 0],
+ "random rotating spinkler":[1/600000, 0],
  "dancing airpods":[1/600000, 0],
  "Emoji if you look at it hard enough":[1/502000, 0],
  "joeverite":[1/460500, 0],
