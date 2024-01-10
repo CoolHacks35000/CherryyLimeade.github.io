@@ -145,6 +145,7 @@ let items = {
  "prplx":[1/739, 0],
  "cat":[1/561, 0],
  "methane in the air":[1/399, 0],
+ "weird blanket":[1/350, 0],
  "$3 crystal (poor)":[1/300, 0],
  "pro":[1/250, 0],
  "roblox studio ball metadata":[1/200, 0],
