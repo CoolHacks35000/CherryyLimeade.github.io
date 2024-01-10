@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Rubik:wght@600&display=swap');
+
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #ff9595;
+    font-family: 'Rubik', sans-serif;
+    background-color: #65b7ff;
     margin: 0;
     padding: 0;
     display: flex;
@@ -11,12 +13,11 @@ body {
 
 .container {
     max-width: 600px;
-    background-color: #ffd1a3;
+    background-color: #20a6ff;
     border-radius: 10px;
     padding: 20px;
-    font-family: 'Roboto', sans-serif;
     text-align: center;
-    /* Remove the box-shadow to eliminate the square above the header */
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5), 0 12px 40px 0 rgba(0, 0, 0, 0.50);
 }
 
 header {
@@ -30,10 +31,21 @@ h1 {
     color: #333;
     font-size: 24px;
 }
+
+h3 {
+    color: #333;
+    font-size: 17px;
+}
  
 p1 {
     color: #333;
     font-size: 18px;
+}
+
+p {
+    color: #333;
+    font-size: 18px;
+    font-family: 'Rubik', sans-serif;
 }
 
 main {
@@ -48,7 +60,7 @@ input {
     font-size: 20px;
     margin-top: 20px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    font-family: 'Poppins', sans-serif; /* Change the font for the item container */ 
+    font-family: 'Rubik', sans-serif;
 }
 
 label {
@@ -60,7 +72,7 @@ label {
     padding: 10px;
     border: 1px solid #ddd;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    font-family: 'Lato', sans-serif; /* Change the font for the button */
+    font-family: 'Rubik', sans-serif;
     
     cursor: pointer; /* Add a pointer cursor on hover */
     transition: background-color 0.3s ease; /* Add a smooth transition for background color change */
@@ -78,7 +90,7 @@ label {
     padding: 10px;
     border: 1px solid #ddd;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    font-family: 'Lato', sans-serif; /* Change the font for the input */
+    font-family: 'Rubik', sans-serif;
     margin-bottom: 10px; /* Add some spacing at the bottom */
     width: 200px; /* Set a specific width for the input */
 }
@@ -92,7 +104,7 @@ label {
     padding: 10px;
     border: 1px solid #ddd;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    font-family: 'Lato', sans-serif; /* Change the font for the input */
+    font-family: 'Rubik', sans-serif;
     margin-bottom: 10px; /* Add some spacing at the bottom */
     width: 200px; /* Set a specific width for the input */
 }
@@ -107,7 +119,7 @@ label {
     border: 1px solid #ddd;
     margin-bottom: 20px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    font-family: 'Lato', sans-serif; /* Change the font for the item container */
+    font-family: 'Rubik', sans-serif;
     background: transparent; /* Remove any background color */
 }
 
@@ -115,18 +127,16 @@ label {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: 'Poppins', sans-serif; /* Change the font for the item counters */
+    font-family: 'Rubik', sans-serif;
 }
 
 #item-counters p {
     font-size: 18px;
     margin: 5px 0;
-    font-family: 'Poppins', sans-serif; /* Change the font for the item counter text */
-}
+    font-family: 'Rubik', sans-serif;}
 
 #item-counters span {
     font-weight: bold;
     color: #333;
     font-size: 20px;
-    font-family: 'Poppins', sans-serif; /* Change the font for the item counter numbers */
-}
+    font-family: 'Rubik', sans-serif;}
