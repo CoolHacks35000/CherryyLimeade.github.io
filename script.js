@@ -309,7 +309,8 @@ function formatNumberWithCommas(number) {
 }
 
 function gameLoop() {
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 700; i++) {
+    collectItem();
     collectItem();
   }
 }
@@ -324,6 +325,4 @@ function itemLoop() {
 createItems();
 
 // Start the game loop
-itemLoop();
-itemLoop();
 itemLoop();
