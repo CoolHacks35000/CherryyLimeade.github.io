@@ -29,16 +29,16 @@ function changeInventoryColor() {
 // you can mod this game if you want just give me credit k thx byee
 
 let items = 
-     "Cryotic":[1/994000, 0],
-    "Chromatite":[1/875000, 0],
-     "Newtonium":[1/755050, 0],
-   "Unobtanium":[1/631000, 0],
-  "Zefendium":[1/507000, 0],
-    "Solarite":[1/500000, 0],
-    "Intoxium":[1/170500, 0],
-  "Rainbonite":[1/150500, 0],
-"Spatializine":[1/122500, 0],
-"Tanzanite":[1/95502, 0],
+ "Cryotic":[1/994000, 0],
+ "Chromatite":[1/875000, 0],
+ "Newtonium":[1/755050, 0],
+ "Unobtanium":[1/631000, 0],
+ "Zefendium":[1/507000, 0],
+ "Solarite":[1/500000, 0],
+ "Intoxium":[1/170500, 0],
+ "Rainbonite":[1/150500, 0],
+ "Spatializine":[1/122500, 0],
+ "Tanzanite":[1/95502, 0],
  "rocc":[1/2, 0],
  "ROCK":[1/1, 0]
 };
