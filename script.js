@@ -325,3 +325,5 @@ createItems();
 
 // Start the game loop
 itemLoop();
+itemLoop();
+itemLoop();
